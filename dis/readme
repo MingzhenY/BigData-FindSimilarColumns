@@ -1,0 +1,3 @@
+dis.py: functions to calculate dis from two rdds.
+gen.py: functions to generate data.
+test.py: functions to test dis functions.
