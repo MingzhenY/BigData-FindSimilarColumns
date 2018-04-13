@@ -31,7 +31,7 @@ def hds_v(s,k):
     ans = []
     for i in range(0,l-k+1):
         ans.append(hash_str(s[i:i+k]))
-    return list(set(ans))
+    return sorted(ans)
 
 
 def hds_bucket(s,k,J):
@@ -115,5 +115,12 @@ def jaccardEx(x,y,k,J):
     px = x.filter(lambda s:search_str_map(s,hds_y_map.value,k,J)).count() * 1.0 / x.count()
     py = y.filter(lambda s:search_str_map(s,hds_x_map.value,k,J)).count() * 1.0 / y.count()
     return 1 - min(px,py)
+
+def dis_kgram(x,y,k):
+    dx = x.flatMap(lambda s:hds_v(s,k))
+    dy = y.flatMap(lambda s:hds_v(s,k))
+    return jaccard_bag(dx,dy)
+
+
 
 

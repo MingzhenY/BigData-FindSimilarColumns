@@ -26,3 +26,11 @@ def test_jaccardEx_2(n,L,k,sim):
     dis = jaccardEx(rddx,rddy,4,0.9)
     return dis
 
+
+def test_kgram(n,sim,k):
+    '''testting dis_kgram'''
+    lx, ly = generateTest_jaccardEx(n,100,4,sim)
+    rddx = sc.parallelize(lx)
+    rddy = sc.parallelize(ly)
+    return dis_kgram(rddx,rddy,k)
+
