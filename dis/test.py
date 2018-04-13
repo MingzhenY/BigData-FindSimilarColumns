@@ -8,9 +8,21 @@ def test_jaccard_1():
     return 'dis_set = '+str(dis_set)+', dis_bag = '+str(dis_bag)
 
 
-def test_jaccard_ex_1():
+def test_jaccardEx_1():
     rddx = sc.parallelize(['this is a string', 'this might not be a string', 'this si a strnig', 'this might be a string', 'this is not a string'])
     rddy = sc.parallelize(['this si a strnig', 'tihs might ont be a srting', 'htis is a strngi', 'thsi imght eb a srting', 'htis si ont a tsrign'])
-    dis_ex = jaccard_ex(rddx,rddy,4,0.9)
-    return dis_ex
+    dis = jaccardEx(rddx,rddy,4,0.9)
+    return dis
+
+def test_jaccardEx_2(n,L,k,sim):
+    '''
+    n strings of length L 
+    where n*sim are mutated k times
+          and n - n*sim are completely different
+    '''
+    lx, ly =  generateTest_jaccardEx(n,L,k,sim)
+    rddx = sc.parallelize(lx)
+    rddy = sc.parallelize(ly)
+    dis = jaccardEx(rddx,rddy,4,0.9)
+    return dis
 
