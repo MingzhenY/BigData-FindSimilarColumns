@@ -31,7 +31,7 @@ def hds_v(s,k):
     ans = []
     for i in range(0,l-k+1):
         ans.append(hash_str(s[i:i+k]))
-    return sorted(ans)
+    return list(set(ans))
 
 
 def hds_bucket(s,k,J):
@@ -103,7 +103,7 @@ def search_str_map(s,hds_map,k,J):
     return False 
 
 
-def jaccard_ex(x,y,k,J):
+def jaccardEx(x,y,k,J):
     '''extended jaccard distance where x and y are column of strings
     F(x,y) = COUNT(values of x where there is a similar value in y) / COUNT(x). 
     And define DIS(x,y) = 1 - min(F(x,y),F(y,x)). 
@@ -114,7 +114,6 @@ def jaccard_ex(x,y,k,J):
     hds_y_map = sc.broadcast(hds_y.collectAsMap())
     px = x.filter(lambda s:search_str_map(s,hds_y_map.value,k,J)).count() * 1.0 / x.count()
     py = y.filter(lambda s:search_str_map(s,hds_x_map.value,k,J)).count() * 1.0 / y.count()
-    
     return 1 - min(px,py)
 
 
