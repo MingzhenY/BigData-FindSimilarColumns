@@ -95,7 +95,6 @@ data = dict([(name,spark.read.json(name)) for name in files])
 names = getColumnNames(data)
 
 # (table_name, column_name, rdd)
-cols = [(t,c,getColumnRDD(data,t,c)) for (t,c) in names]
-
+cols = dict([((t,c),getColumnRDD(data,t,c)) for (t,c) in names])
 
 
