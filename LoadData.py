@@ -70,7 +70,9 @@ def getColumnNames(data):
 def getColumnRDD(data,table_name, column_name):
     if table_name in data:
         if column_name in data[table_name].schema.names:
-            return data[table_name].select(column_name).rdd.map(lambda x:x[0])
+            return data[table_name].select(column_name).rdd\
+                    .map(lambda x:x[0]).filter(lambda x: x is not None)\
+                    .map(lambda x:str(x))
         else:
             return
     else:
@@ -97,18 +99,3 @@ cols = [(t,c,getColumnRDD(data,t,c)) for (t,c) in names]
 
 
 
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
